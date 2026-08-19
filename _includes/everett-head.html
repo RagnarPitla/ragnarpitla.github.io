@@ -1,0 +1,101 @@
+{% assign meta_title = page.title | default: site.title %}
+{% if page.site_section == "everett" and page.url != "/everett/" %}
+  {% assign meta_title = meta_title | append: " | Everett" %}
+{% endif %}
+{% assign meta_description = page.description | default: site.description %}
+{% assign meta_image = page.og_image | default: site.everett.og_image %}
+{% assign canonical_url = page.url | absolute_url %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% include theme-boot.html %}
+<title>{{ meta_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
+<meta property="og:site_name" content="Ragnar Pitla projects">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="{% if page.schema_type == 'article' %}article{% else %}website{% endif %}">
+<meta property="og:image" content="{{ meta_image | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Everett: one World per project, with project context gathered into one working reality.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:image" content="{{ meta_image | absolute_url }}">
+<meta name="twitter:image:alt" content="Everett: one World per project, with project context gathered into one working reality.">
+{% if page.schema_type == "article" %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% for tag in page.tags %}<meta property="article:tag" content="{{ tag }}">{% endfor %}
+{% endif %}
+<meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#3d3b3a" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/brand/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="64x64" href="{{ '/assets/images/brand/favicon.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/images/brand/apple-touch-icon.png' | relative_url }}">
+<link rel="alternate" type="application/atom+xml" title="Everett updates" href="{{ '/everett/feed.xml' | absolute_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+{% if page.schema_type == "root" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "url": {{ '/' | absolute_url | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }}
+  }
+}
+</script>
+{% elsif page.schema_type == "software" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ site.everett.title | jsonify }},
+  "description": {{ site.everett.description | append: " Everett is a pre-release product." | jsonify }},
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "macOS",
+  "url": {{ '/everett/' | absolute_url | jsonify }},
+  "image": {{ site.everett.og_image | absolute_url | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }}
+  }
+}
+</script>
+{% elsif page.schema_type == "article" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "mainEntityOfPage": {{ canonical_url | jsonify }},
+  "image": {{ page.og_image | absolute_url | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ page.author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }}
+  }
+}
+</script>
+{% else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ meta_title | jsonify }},
+  "description": {{ meta_description | jsonify }},
+  "url": {{ canonical_url | jsonify }}
+}
+</script>
+{% endif %}

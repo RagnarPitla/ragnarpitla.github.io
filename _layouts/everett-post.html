@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{% assign words = content | strip_html | number_of_words %}
+{% assign adjusted_words = words | plus: 199 %}
+{% assign reading_minutes = adjusted_words | divided_by: 200 %}
+{% if reading_minutes < 1 %}{% assign reading_minutes = 1 %}{% endif %}
+{% assign posts = site.everett_updates | sort: "date" | reverse %}
+{% assign current_index = 0 %}
+{% assign hero_label = "Historical design mockup" %}
+{% if page.hero_kind == "current-product-screenshot" %}{% assign hero_label = "Current product screenshot" %}{% endif %}
+{% if page.hero_kind == "design-direction" %}{% assign hero_label = "Design direction" %}{% endif %}
+{% for post in posts %}
+  {% if post.url == page.url %}{% assign current_index = forloop.index0 %}{% endif %}
+{% endfor %}
+<article class="post shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ '/everett/' | relative_url }}">Everett</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ '/everett/updates/' | relative_url }}">Updates</a>
+  </nav>
+  <header class="post-header">
+    <p class="status-label">{{ page.status_label }}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="post-summary">{{ page.summary }}</p>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span aria-hidden="true">/</span>
+      <span>{{ reading_minutes }} min read</span>
+    </div>
+  </header>
+
+  {% include everett-figure.html
+    src=page.hero_image
+    alt=page.hero_alt
+    width=page.hero_width
+    height=page.hero_height
+    label=hero_label
+    caption=page.hero_caption
+    loading="eager"
+  %}
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <section class="post-tags" aria-label="Tags">
+    <h2>Topics</h2>
+    <ul class="tag-list">
+      {% for tag in page.tags %}
+        <li><a href="{{ '/everett/updates/' | relative_url }}?tag={{ tag | slugify }}">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% include everett-source-basis.html %}
+
+  <nav class="post-nav" aria-label="Update navigation">
+    {% assign older_index = current_index | plus: 1 %}
+    {% if older_index < posts.size %}
+      {% assign older = posts[older_index] %}
+      <a href="{{ older.url | relative_url }}"><span>Older update</span><strong>{{ older.title }}</strong></a>
+    {% endif %}
+    {% if current_index > 0 %}
+      {% assign newer_index = current_index | minus: 1 %}
+      {% assign newer = posts[newer_index] %}
+      <a href="{{ newer.url | relative_url }}"><span>Newer update</span><strong>{{ newer.title }}</strong></a>
+    {% endif %}
+  </nav>
+  <p class="return-link"><a href="{{ '/everett/updates/' | relative_url }}">Return to all updates</a></p>
+</article>

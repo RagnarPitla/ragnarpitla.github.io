@@ -1,0 +1,14 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ '/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/everett/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/everett/updates/' | absolute_url }}</loc></url>
+  {% assign posts = site.everett_updates | sort: "date" | reverse %}
+  {% for post in posts %}
+  <url><loc>{{ post.url | absolute_url }}</loc></url>
+  {% endfor %}
+</urlset>

@@ -1,0 +1,16 @@
+<section class="source-basis" aria-labelledby="source-basis">
+  <h2 id="source-basis">Source basis</h2>
+  <ul>
+    {% for basis in page.source_basis %}
+      <li>{{ basis }}</li>
+    {% endfor %}
+  </ul>
+  {% if page.public_links and page.public_links.size > 0 %}
+    <h3>Public links</h3>
+    <ul>
+      {% for link in page.public_links %}
+        <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>
