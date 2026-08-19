@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+  <title>Everett social card</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      display: grid;
+      place-items: center;
+      background: #f7f4ef;
+      color: #242424;
+      font-family: "Segoe UI Variable", "Segoe UI", Aptos, Calibri, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .card {
+      width: 1120px;
+      height: 550px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 54px;
+      padding: 70px;
+      background: #ffffff;
+      border: 2px solid #dedede;
+      border-top: 12px solid #b11f4b;
+      border-radius: 28px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+    }
+    .eyebrow {
+      margin: 0 0 22px;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: 92px;
+      line-height: .95;
+      letter-spacing: -.045em;
+    }
+    .thesis {
+      margin: 28px 0 0;
+      color: #5c5c5c;
+      font-size: 39px;
+      line-height: 1.15;
+      font-weight: 650;
+    }
+    .worlds {
+      position: relative;
+      height: 390px;
+    }
+    .world {
+      position: absolute;
+      width: 310px;
+      height: 190px;
+      padding: 24px;
+      background: #fcfbf8;
+      border: 2px solid #dedede;
+      border-radius: 18px;
+    }
+    .world::before {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 8px;
+      margin-bottom: 22px;
+      background: #b11f4b;
+      border-radius: 999px;
+    }
+    .world b { display: block; font-size: 25px; }
+    .world span { display: block; margin-top: 12px; color: #5c5c5c; font-size: 19px; }
+    .world-one { top: 0; left: 0; }
+    .world-two { top: 100px; left: 96px; border-color: #b11f4b; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12); }
+    .world-three { top: 200px; left: 0; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section>
+      <p class="eyebrow">Everett</p>
+      <h1>One World per project.</h1>
+      <p class="thesis">Project context gathered into one working reality.</p>
+    </section>
+    <div class="worlds" aria-hidden="true">
+      <div class="world world-one"><b>design-system</b><span>Board / Web / agents</span></div>
+      <div class="world world-two"><b>northwind-api</b><span>Focused World</span></div>
+      <div class="world world-three"><b>release-notes</b><span>Review / terminals</span></div>
+    </div>
+  </main>
+</body>
+</html>

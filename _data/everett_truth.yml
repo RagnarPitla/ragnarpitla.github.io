@@ -1,0 +1,28 @@
+truth_as_of: 2026-08-19
+groups:
+  - key: shipping
+    label: "Shipping"
+    items:
+      - "macOS installed application"
+      - "Worlds with their own workspace folders"
+      - "Real PTYs for existing coding agents"
+      - "Persistent Board with terminals, notes, drawings, and Web tabs"
+      - "Per-World shell history, caches, temporary directory, git configuration, and port range"
+      - "System Default, Chrome, Edge, and optional Everett Preview Web targets"
+      - "Everett Preview browser storage partitioned per World"
+      - "Continuous local persistence and crash recovery"
+  - key: partial
+    label: "Partial or shared"
+    items:
+      - "The host filesystem remains shared"
+      - "Host dotfiles, keychain access, and some coding-agent CLI state remain reachable or shared"
+      - "External browsers using system profiles share login state across Worlds"
+      - "Process cleanup is strong but cannot find a fully detached, socketless process"
+  - key: direction
+    label: "Design direction"
+    items:
+      - "Herdr-backed terminal runtime"
+      - "Enforced Mount boundaries"
+      - "Gates, Review, and Ledger depth"
+      - "World Apps"
+      - "Windows support"

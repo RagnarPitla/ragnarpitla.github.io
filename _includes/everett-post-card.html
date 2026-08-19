@@ -1,0 +1,21 @@
+{% assign card_label = "Historical design mockup" %}
+{% if include.post.hero_kind == "current-product-screenshot" %}{% assign card_label = "Current product screenshot" %}{% endif %}
+{% if include.post.hero_kind == "design-direction" %}{% assign card_label = "Design direction" %}{% endif %}
+<article class="update-card" data-update-card data-tags="{% for tag in include.post.tags %}|{{ tag | slugify }}{% endfor %}|">
+  <figure class="card-figure">
+    <a class="card-image" href="{{ include.post.url | relative_url }}">
+      <img src="{{ include.post.hero_thumbnail | relative_url }}" alt="{{ include.post.hero_alt }}" width="720" height="450" loading="lazy" decoding="async">
+    </a>
+    <figcaption><strong>{{ card_label }}:</strong> {{ include.post.hero_caption }}</figcaption>
+  </figure>
+  <div class="card-copy">
+    <p class="status-label">{{ include.post.status_label }}</p>
+    <h2><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h2>
+    <p>{{ include.post.summary }}</p>
+    <div class="card-meta">
+      <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%B %-d, %Y" }}</time>
+      <span aria-hidden="true">/</span>
+      <span>{% for tag in include.post.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+    </div>
+  </div>
+</article>

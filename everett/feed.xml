@@ -1,0 +1,22 @@
+---
+layout: null
+permalink: /everett/feed.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+{% assign posts = site.everett_updates | sort: "date" | reverse -%}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Everett updates</title>
+  <link href="{{ '/everett/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/everett/updates/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <updated>{{ posts.first.date | date_to_xmlschema }}</updated>
+  <id>{{ '/everett/updates/' | absolute_url }}</id>
+  {% for post in posts %}
+  <entry>
+    <title>{{ post.title | xml_escape }}</title>
+    <link href="{{ post.url | absolute_url }}"/>
+    <id>{{ post.url | absolute_url }}</id>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <summary>{{ post.summary | xml_escape }}</summary>
+  </entry>
+  {% endfor %}
+</feed>

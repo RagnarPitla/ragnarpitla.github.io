@@ -1,0 +1,149 @@
+---
+title: "Everett - One World per project"
+description: "Everett gives each software project a World for its folders, terminals, AI agents, Web context, and persistent visual Board."
+site_section: everett
+schema_type: software
+permalink: /everett/
+---
+<section class="everett-hero shell">
+  <div class="hero-copy">
+    <p class="eyebrow">A pre-release macOS application</p>
+    <h1>One World per project. Everything it needs inside.</h1>
+    <p class="lede">Everett gathers the working reality of a software project without pretending every boundary is stronger than it is.</p>
+    <div class="hero-actions">
+      <a class="button" href="#product-truth">See what is true today</a>
+      <a class="button button-secondary" href="{{ '/everett/updates/' | relative_url }}">Read updates</a>
+    </div>
+  </div>
+  <div class="hero-fact" aria-label="Measured project context problem">
+    <span>Measured in a live session</span>
+    <strong>7 agents</strong>
+    <strong>2 directories</strong>
+    <strong>5 of 7 outside the implied World</strong>
+  </div>
+</section>
+
+<section class="section shell" aria-labelledby="measured-problem">
+  <div class="section-heading">
+    <p class="eyebrow">The measured problem</p>
+    <h2 id="measured-problem">A terminal workspace is not a project reality.</h2>
+  </div>
+  <div class="two-column">
+    <p>Six unrelated products accumulated in one ad-hoc terminal workspace because the available top-level object grouped terminals, not projects. Names suggested one context while processes were actually running somewhere else.</p>
+    <p>Window managers can group windows. Terminal runtimes can preserve panes and agent sessions. Everett adds the missing project-level object: a World that supplies the working context and keeps the current project's surfaces legible.</p>
+  </div>
+</section>
+
+<section class="section model-section" aria-labelledby="product-model">
+  <div class="shell">
+    <div class="section-heading">
+      <p class="eyebrow">Product model</p>
+      <h2 id="product-model">World, Web, and Board.</h2>
+    </div>
+    <div class="model-grid">
+      <article>
+        <span class="model-number">01</span>
+        <h3>World</h3>
+        <p>The top-level project reality: workspace folders, terminals, agents, local state, Web links, and visual context.</p>
+      </article>
+      <article>
+        <span class="model-number">02</span>
+        <h3>Web</h3>
+        <p>A World-local collection of URLs, tabs, home choices, and launch preferences, separate from the browser target that opens them.</p>
+      </article>
+      <article>
+        <span class="model-number">03</span>
+        <h3>Board</h3>
+        <p>A persistent canvas where terminals, notes, drawings, and Web tabs remain arranged as working context across restarts.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section shell" id="product-truth" aria-labelledby="truth-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Current product truth</p>
+    <h2 id="truth-heading">What is true today</h2>
+    <p>Truth as of <time datetime="{{ site.data.everett_truth.truth_as_of }}">{{ site.data.everett_truth.truth_as_of | date: "%B %-d, %Y" }}</time>.</p>
+  </div>
+  <div class="truth-grid">
+    {% for group in site.data.everett_truth.groups %}
+      <article class="truth-card truth-{{ group.key }}">
+        <h3>{{ group.label }}</h3>
+        <ul>
+          {% for item in group.items %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section visual-section" aria-labelledby="visuals">
+  <div class="shell">
+    <div class="section-heading">
+      <p class="eyebrow">Visual working context</p>
+      <h2 id="visuals">The model, shown honestly.</h2>
+      <p>Everett is a pre-release product. Screens may be historical design mockups or design directions.</p>
+    </div>
+    <div class="visual-grid">
+      {% include everett-figure.html
+        src="/assets/images/everett/full/worlds-overview.png"
+        alt="Everett Worlds overview showing separate project Worlds and their activity."
+        width="1440"
+        height="900"
+        label="Historical design mockup"
+        caption="Separate Worlds keep unrelated project realities legible while they continue running."
+      %}
+      {% include everett-figure.html
+        src="/assets/images/everett/full/web-model.png"
+        alt="Everett Web model comparing World-local links with four browser targets."
+        width="1440"
+        height="900"
+        label="Historical design mockup"
+        caption="The World owns the Web collection; the selected target determines whether browser state is shared or partitioned."
+      %}
+      {% include everett-figure.html
+        src="/assets/images/everett/full/board.png"
+        alt="Everett Board mockup with terminals, notes, drawings, and a Web card."
+        width="1440"
+        height="900"
+        label="Historical design mockup"
+        caption="The Board keeps heterogeneous working context spatially arranged inside a World."
+      %}
+      {% include everett-figure.html
+        src="/assets/images/everett/full/world-apps-direction.png"
+        alt="World Apps design direction showing references, app launchers, and external running companions."
+        width="1440"
+        height="900"
+        label="Design direction"
+        caption="World Apps is design and MVP direction, not shipping behavior."
+      %}
+    </div>
+  </div>
+</section>
+
+<section class="section shell" aria-labelledby="latest-updates">
+  <div class="section-heading heading-row">
+    <div>
+      <p class="eyebrow">Development journal</p>
+      <h2 id="latest-updates">Latest updates</h2>
+    </div>
+    <a class="text-link" href="{{ '/everett/updates/' | relative_url }}">All updates</a>
+  </div>
+  <div class="updates-list">
+    {% assign latest_posts = site.everett_updates | sort: "date" | reverse %}
+    {% for post in latest_posts limit: 3 %}
+      {% include everett-post-card.html post=post %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section shell public-links" aria-labelledby="public-links">
+  <h2 id="public-links">Public product links</h2>
+  <ul>
+    <li><a href="{{ '/everett/updates/' | relative_url }}">Everett updates</a></li>
+    <li><a href="https://ragnarpitla.github.io/chess-local-learning/">Ramify</a></li>
+  </ul>
+</section>

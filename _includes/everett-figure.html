@@ -1,0 +1,13 @@
+{% assign figure_loading = include.loading | default: "lazy" %}
+<figure class="everett-figure">
+  <a href="{{ include.src | relative_url }}">
+    <img
+      src="{{ include.src | relative_url }}"
+      alt="{{ include.alt }}"
+      width="{{ include.width }}"
+      height="{{ include.height }}"
+      loading="{{ figure_loading }}"
+      decoding="async"{% if figure_loading == "eager" %} fetchpriority="high"{% endif %}>
+  </a>
+  <figcaption><strong>{{ include.label }}:</strong> {{ include.caption }}</figcaption>
+</figure>

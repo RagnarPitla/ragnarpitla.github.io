@@ -1,0 +1,36 @@
+---
+title: "Updates"
+description: "Everett development updates separating current behavior, measured evidence, known gaps, and design direction."
+site_section: everett
+permalink: /everett/updates/
+updates_script: true
+---
+<section class="updates-page shell">
+  <header class="page-header">
+    <p class="eyebrow">Everett development journal</p>
+    <h1>Updates</h1>
+    <p class="lede">Entries separate current behavior, measured evidence, known gaps, and direction so the product story stays calibrated as Everett changes.</p>
+  </header>
+
+  {% assign posts = site.everett_updates | sort: "date" | reverse %}
+  {% assign all_tags = "" | split: "" %}
+  {% for post in posts %}
+    {% assign all_tags = all_tags | concat: post.tags %}
+  {% endfor %}
+  {% assign all_tags = all_tags | uniq | sort %}
+
+  <div class="tag-filters" aria-label="Filter updates by tag">
+    <button type="button" data-tag-filter="" aria-pressed="true">All</button>
+    {% for tag in all_tags %}
+      <button type="button" data-tag-filter="{{ tag | slugify }}" aria-pressed="false">{{ tag }}</button>
+    {% endfor %}
+  </div>
+  <p class="filter-live" data-filter-live aria-live="polite"></p>
+  <p class="filter-empty" data-filter-empty hidden></p>
+
+  <div class="updates-list">
+    {% for post in posts %}
+      {% include everett-post-card.html post=post %}
+    {% endfor %}
+  </div>
+</section>

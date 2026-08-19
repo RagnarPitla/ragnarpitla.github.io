@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  {% include everett-head.html %}
+</head>
+<body class="{% if page.site_section == 'everett' %}everett-site{% else %}project-site{% endif %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% if page.site_section == "everett" %}
+    {% include everett-header.html %}
+  {% else %}
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="wordmark" href="{{ '/' | relative_url }}"><span>Ragnar Pitla</span></a>
+        <nav aria-label="Project navigation">
+          <a href="{{ '/everett/' | relative_url }}">Everett</a>
+          <a href="https://ragnarpitla.github.io/chess-local-learning/">Ramify</a>
+        </nav>
+      </div>
+    </header>
+  {% endif %}
+  <main id="main">
+    {{ content }}
+  </main>
+  {% if page.site_section == "everett" %}
+    {% include everett-footer.html %}
+  {% else %}
+    <footer class="site-footer">
+      <div class="shell footer-inner"><p>Public projects by Ragnar Pitla.</p></div>
+    </footer>
+  {% endif %}
+  {% if page.updates_script %}
+    <script defer src="{{ '/assets/js/everett-updates.js' | relative_url }}"></script>
+  {% endif %}
+</body>
+</html>

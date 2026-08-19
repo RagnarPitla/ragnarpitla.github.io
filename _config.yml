@@ -1,0 +1,63 @@
+title: "Ragnar Pitla projects"
+description: "Public project hub for Ragnar Pitla."
+url: "https://ragnarpitla.github.io"
+baseurl: ""
+timezone: "America/New_York"
+lang: "en-US"
+author:
+  name: "Ragnar Pitla"
+
+everett:
+  title: "Everett"
+  tagline: "One world at a time."
+  description: "Everett gives every software project its own World for folders, terminals, AI agents, browser context, and visual working context."
+  og_image: "/assets/images/social/everett-og.png"
+
+theme: null
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+future: false
+strict_front_matter: true
+liquid:
+  error_mode: strict
+  strict_filters: true
+
+collections:
+  everett_updates:
+    output: true
+    permalink: /everett/updates/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: everett_updates
+    values:
+      layout: everett-post
+      author: "Ragnar Pitla"
+      site_section: "everett"
+      schema_type: "article"
+
+titles_from_headings:
+  enabled: false
+readme_index:
+  enabled: false
+  remove_originals: false
+
+exclude:
+  - .bundle
+  - .github
+  - .jekyll-cache
+  - .jekyll-metadata
+  - .review
+  - .sass-cache
+  - README.md
+  - scripts
+  - tools
+  - vendor
