@@ -1,36 +1,37 @@
 ---
-title: "Everett - One World per project"
-description: "Everett gives each software project a World for its folders, terminals, AI agents, Web context, and persistent visual Board."
+title: "Everett - A World workspace for every project"
+description: "Everett is a macOS World workspace that keeps each software project's folders, terminals, AI agents, Web context, Board, and local state together."
 site_section: everett
 schema_type: software
 permalink: /everett/
 ---
 <section class="everett-hero shell">
   <div class="hero-copy">
-    <p class="eyebrow">A pre-release macOS application</p>
-    <h1>One World per project. Everything it needs inside.</h1>
-    <p class="lede">Everett gathers the working reality of a software project without pretending every boundary is stronger than it is.</p>
+    <p class="eyebrow">A pre-release macOS World workspace</p>
+    <h1>Every project gets its own World workspace.</h1>
+    <p class="lede">Everett keeps a project's folders, terminals, agents, Web context, notes, drawings, and local state together in one persistent place, so multiple projects can stay active without mixing their context.</p>
     <div class="hero-actions">
-      <a class="button" href="#product-truth">See what is true today</a>
+      <a class="button" href="#world-workspace">Explore the World workspace</a>
       <a class="button button-secondary" href="{{ '/everett/updates/' | relative_url }}">Read updates</a>
     </div>
   </div>
-  <div class="hero-fact" aria-label="Measured project context problem">
-    <span>Measured in a live session</span>
-    <strong>7 agents</strong>
-    <strong>2 directories</strong>
-    <strong>5 of 7 outside the implied World</strong>
-  </div>
+  <aside class="hero-origin" id="why-everett" aria-labelledby="why-everett-title">
+    <p class="eyebrow">Why the name Everett</p>
+    <p class="origin-year" aria-hidden="true">1957</p>
+    <h2 id="why-everett-title">Hugh Everett III and many worlds</h2>
+    <p>The physicist Hugh Everett III proposed the many-worlds interpretation of quantum mechanics in 1957.</p>
+    <p class="origin-bridge">That is the product metaphor: every software project lives in its own World, and several Worlds can remain active while each keeps its workspace and context together.</p>
+  </aside>
 </section>
 
-<section class="section shell" aria-labelledby="measured-problem">
+<section class="section shell" id="world-workspace" aria-labelledby="world-workspace-heading">
   <div class="section-heading">
-    <p class="eyebrow">The measured problem</p>
-    <h2 id="measured-problem">A terminal workspace is not a project reality.</h2>
+    <p class="eyebrow">The World workspace</p>
+    <h2 id="world-workspace-heading">Everything for one project, together.</h2>
   </div>
   <div class="two-column">
-    <p>Six unrelated products accumulated in one ad-hoc terminal workspace because the available top-level object grouped terminals, not projects. Names suggested one context while processes were actually running somewhere else.</p>
-    <p>Window managers can group windows. Terminal runtimes can preserve panes and agent sessions. Everett adds the missing project-level object: a World that supplies the working context and keeps the current project's surfaces legible.</p>
+    <p>A World is Everett's top-level workspace. It gathers the workspace folders, terminals, coding agents, Web collection, Board arrangement, and local working state that belong to one software project.</p>
+    <p>You can keep several Worlds active and move between them without collapsing every project into one terminal or browser pile. Each World stays persistent, legible, and ready to resume.</p>
   </div>
 </section>
 
@@ -44,7 +45,7 @@ permalink: /everett/
       <article>
         <span class="model-number">01</span>
         <h3>World</h3>
-        <p>The top-level project reality: workspace folders, terminals, agents, local state, Web links, and visual context.</p>
+        <p>The top-level project workspace: folders, terminals, agents, local state, Web links, and visual context that belong together.</p>
       </article>
       <article>
         <span class="model-number">02</span>
@@ -138,12 +139,4 @@ permalink: /everett/
       {% include everett-post-card.html post=post %}
     {% endfor %}
   </div>
-</section>
-
-<section class="section shell public-links" aria-labelledby="public-links">
-  <h2 id="public-links">Public product links</h2>
-  <ul>
-    <li><a href="{{ '/everett/updates/' | relative_url }}">Everett updates</a></li>
-    <li><a href="https://ragnarpitla.github.io/chess-local-learning/">Ramify</a></li>
-  </ul>
 </section>

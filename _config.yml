@@ -9,8 +9,8 @@ author:
 
 everett:
   title: "Everett"
-  tagline: "One world at a time."
-  description: "Everett gives every software project its own World for folders, terminals, AI agents, browser context, and visual working context."
+  tagline: "A World workspace for every project."
+  description: "Everett is a macOS World workspace that keeps each software project's folders, terminals, AI agents, Web context, Board, and local state together."
   og_image: "/assets/images/social/everett-og.png"
 
 theme: null
