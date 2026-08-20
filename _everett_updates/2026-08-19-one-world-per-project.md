@@ -1,15 +1,15 @@
 ---
 layout: everett-post
-title: "Why Everett exists: one World per project"
+title: "Everett starts with a World workspace"
 slug: one-world-per-project
 date: 2026-08-19 12:00:00 -0400
-summary: "A measured project-context failure led Everett to make the World, not the terminal workspace, its top-level object."
-description: "The measured problem behind Everett and the model of one World per software project."
+summary: "A World is the persistent workspace that keeps one software project's folders, terminals, agents, Web context, Board, and local state together."
+description: "Why Everett makes the World workspace, not a terminal or agent group, the top-level object for a software project."
 status: product-thesis
-status_label: "Product thesis grounded in measured current evidence"
+status_label: "Product model: one World workspace per project"
 tags:
   - worlds
-  - ai-agents
+  - workspace
 hero_image: /assets/images/everett/full/worlds-overview.png
 hero_thumbnail: /assets/images/everett/thumb/worlds-overview.png
 hero_width: 1440
@@ -19,40 +19,38 @@ hero_caption: "Separate Worlds keep unrelated project realities legible while th
 hero_kind: historical-design-mockup
 og_image: /assets/images/social/everett-og.png
 source_basis:
-  - "Grounded in Everett's measured Herdr session notes, current brand decisions, and current World requirements."
+  - "Grounded in Everett's current brand decisions, World requirements, and implemented product truth."
   - "Current boundary statements reflect the implemented macOS application and its isolation audit, not the stronger future Mount design."
 public_links: []
 ---
 
-The clearest reason for Everett arrived as a measurement, not a mood. In one live Herdr session, seven agents were running across two directories. Five of the seven were working outside the World their names implied.
+Everett begins with a simple product decision: a software project needs a workspace that is larger than a folder, a terminal tab, an agent session, or a browser window.
 
-That mismatch was visible only after the session state was read as data. On screen, the work looked organized. Tabs had names such as a chess build, an iOS teleprompter, a Remotion pipeline, and a visual development tool. Underneath those names, most of the agents were sitting in the same repository.
+It needs a **World workspace**.
 
-The most revealing workspace was called `FUn--Adhoc`. It held six unrelated products because there was no stronger place to put them. It was not a project. It was a leftovers drawer with terminals in it.
+A World is the persistent place where one software project keeps the surfaces and state that belong together. Workspace folders, terminals, coding agents, Web context, notes, drawings, launch preferences, and local state all have the same project owner.
 
-This was not operator failure. It was a model failure.
+That ownership is the product spine. Everett is not an agent dashboard with a project label added later. It is not a terminal multiplexer with a larger canvas around it. It is a project workspace whose internal surfaces can include terminals and agents.
 
-## The object a tool offers becomes the behavior it encourages
+## A project is more than a directory
 
-A window manager groups windows. It can keep related applications beside one another, but it does not know whether a browser, editor, and terminal belong to the same codebase.
+A source folder is important, but it does not contain the full working reality of a project.
 
-A terminal runtime groups terminals, panes, tabs, and agent processes. It can preserve sessions and report useful process state, but a terminal tab is still a terminal tab. Its working directory is usually inherited once at launch, then trusted.
+The project also has running processes, terminal history, agent conversations, documentation, local servers, browser tabs, design references, notes, diagrams, and decisions in progress. Those pieces often spread across applications and remain open long after the original folder was selected.
 
-Neither object represents the whole project reality.
+When the user returns, the real question is not only, "Where is the repository?" It is, "Where is the state of this project, and can I resume it without reconstructing the whole working setup?"
 
-When the top-level object is a terminal workspace, unrelated work can accumulate there without violating any rule. A tab can be called `chess-build` while its shell is running in a completely different repository. The label and the execution context drift apart because nothing owns both.
+Everett answers with a World. The World names the project, supplies its workspace, restores its visible context, and gives new work a known place to begin.
 
-Everett makes a different choice. The top-level object is a **World**.
+## What a World workspace owns
 
-## A World is the project reality
+A World owns the workspace folders that define the project context. New terminals and agents begin from that context rather than inheriting whatever directory happened to be active somewhere else.
 
-A World is the durable place where one software project gathers its workspace folders, terminals, agents, Web links, launch preferences, local environment, history, and persistent Board.
+It owns a Web collection: the URLs, tab choices, home setting, and launch preferences that belong with the project. The browser target can still be shared or separated, but the collection has a clear World owner.
 
-The word matters because it changes the frame. A World is not a prettier folder picker and not a renamed terminal workspace. It is the object that says: this work belongs together, this is the context that should be visible now, and this is where new work begins.
+It owns a persistent Board where terminals, notes, drawings, and Web cards stay spatially arranged. The Board is not a separate whiteboard product. It is a visual layer of the same World workspace.
 
-A **Shift** is the act of moving from one World to another. The whole Everett window changes with it. The Board, terminal set, Web collection, and current context are restored for the destination World rather than left behind as unrelated tabs.
-
-The benefit is relevance and focus. Isolation is one mechanism that can support that benefit, but it is not the whole product story and it is not yet absolute.
+It also owns selected local state, including shell history, caches, temporary files, git configuration, and a port range. Those boundaries help keep project work relevant and legible even when the host operating system remains shared.
 
 {% include everett-figure.html
   src="/assets/images/everett/full/board.png"
@@ -63,17 +61,33 @@ The benefit is relevance and focus. Isolation is one mechanism that can support 
   caption="The Board explores how one World can keep different kinds of working context visible together."
 %}
 
-## The practical change is small and consequential
+## Multiple Worlds can stay active
 
-In the ad-hoc session, the shell happened to start in a repository and the tab inherited it. Everett reverses that relationship. The World supplies the workspace context when a terminal or agent starts.
+Everett is designed for people who work across several software projects at the same time.
 
-That does not solve every form of drift by itself. A process can still change directories after launch unless a runtime boundary prevents it. But it creates a stable owner against which drift can be detected, explained, and eventually blocked.
+A Shift moves the Everett window from one World to another. The destination World restores its Board, terminals, Web collection, and current context. The other Worlds do not have to be dismantled just because they are not visible.
 
-It also changes how the user reads the system. Instead of asking, "Which terminal did I put that in?" the user can ask, "Which World owns this work?" The answer connects the project name, workspace, agents, Web context, and Board.
+This is the practical value of the many-worlds metaphor. Several project realities can continue alongside one another, but each remains its own workspace. Moving between them should feel like changing the active project reality, not adding another tab to an already mixed pile.
 
-This is why Everett is not trying to become a terminal multiplexer. The design direction is to integrate Herdr for the terminal runtime rather than rebuild its panes, persistence, agent detection, and worktree handling. That integration does not ship in the installed application today. The current app runs real PTYs itself.
+The user can ask, "Which World owns this work?" That answer connects the project name, workspace, terminals, agents, Web context, and Board.
 
-The distinction is important: the World model is current product thinking and partially implemented behavior; the Herdr-backed runtime is direction.
+## Why the name Everett
+
+Everett is named for Hugh Everett III (1930-1982), the physicist who proposed the many-worlds interpretation of quantum mechanics in 1957.
+
+The product uses that history as an organizing metaphor. Each software project becomes its own World. Different Worlds can remain active at the same time. Shifting the visible World changes the active working context while the others keep their own state.
+
+The name is not a claim that software projects behave like quantum systems. It is a concise way to express the experience Everett is building: many distinct project Worlds, each persistent, each internally coherent, and each ready when the user returns.
+
+## Why not a terminal or agent workspace
+
+A terminal runtime groups terminals, panes, tabs, and processes. That is valuable infrastructure, but its top-level object is still terminal-shaped.
+
+An agent dashboard groups agent sessions. That helps with orchestration, but it makes the agent the organizing object. A project can contain agents, yet it also contains files, browsers, local services, notes, drawings, and human decisions.
+
+Everett groups the project. Terminals and agents live inside the World workspace because they are part of the project, not because they define the project.
+
+The design direction is to integrate Herdr for terminal runtime depth rather than rebuild its panes, persistence, agent detection, and worktree handling. That integration does not ship in the installed application today. The current app runs real PTYs itself.
 
 ## The honest boundary today
 
@@ -91,14 +105,8 @@ It is safe to say that Everett organizes and restores project context. It is not
 
 The process boundary also has a narrow edge. Everett strongly reaps the process trees it starts, including ordinary background jobs, but a fully detached process with no remaining socket can escape discovery. The product should state that limit rather than hide it behind the general idea of cleanup.
 
-## Why measured evidence belongs in the product story
+## The World workspace is the product
 
-The original seven-agent session does more than provide a dramatic opening. It gives Everett a falsifiable problem.
+If Worlds work, a user should be able to tell which project owns a terminal, agent, Web collection, note, or Board object. New work should begin in the right workspace. Returning to a project should restore its relevant state. Shifting Worlds should replace the visible project context rather than add more fragments to a shared pile.
 
-If Worlds work, the user should be able to tell which project owns an agent. New terminals should begin in the right workspace. Web links and Board objects should restore with the right project. A Shift should replace the visible project reality rather than add more tabs to a shared pile.
-
-The same evidence also prevents the design from becoming abstract. "Better focus" is easy to claim. "Five of seven agents were outside the project their names implied" is a condition that can be measured again.
-
-Everett exists to make that failure harder to create, easier to see, and eventually impossible within the boundaries it can honestly enforce.
-
-The World is the product spine because it connects the name on the screen to the work that is actually happening. Everything else, from Web to Board to future Mount enforcement, is valuable insofar as it keeps that connection intact.
+The World workspace is the product spine because it connects the name on the screen to the work that is actually happening. Everything else, from Web to Board to future Mount enforcement, is valuable insofar as it helps one project remain together, understandable, and ready to resume.

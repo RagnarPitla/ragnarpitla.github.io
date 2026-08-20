@@ -172,7 +172,7 @@ EXPECTED_POSTS = [
     "world-apps-direction",
 ]
 EXPECTED_POST_STATUS_LABELS = {
-    "one-world-per-project": "Product thesis grounded in measured current evidence",
+    "one-world-per-project": "Product model: one World workspace per project",
     "the-web-model": "Current product model",
     "world-apps-direction": "Design and MVP direction, not shipping",
 }
@@ -401,6 +401,30 @@ def source_verify(root: Path, checks: Checks) -> None:
     head_include = (root / "_includes/everett-head.html").read_text(encoding="utf-8")
     checks.check("{% include everett-head.html %}" in default_layout, "default layout must include the shared head")
     checks.check(head_include.find("{% include theme-boot.html %}") < head_include.find('application/ld+json'), "theme boot must precede JSON-LD")
+
+    everett_home = (root / "everett/index.html").read_text(encoding="utf-8")
+    for marker in (
+        "World workspace",
+        "Hugh Everett III",
+        "many-worlds interpretation",
+        "1957",
+        'id="why-everett"',
+    ):
+        checks.check(marker in everett_home, f"Everett homepage missing required positioning: {marker}")
+    for marker in (
+        "Measured in a live session",
+        "7 agents",
+        "2 directories",
+        "5 of 7 outside",
+        "chess-local-learning",
+        "Ramify",
+    ):
+        checks.check(marker not in everett_home, f"Everett homepage retains unrelated or incident-led copy: {marker}")
+    everett_header = (root / "_includes/everett-header.html").read_text(encoding="utf-8")
+    everett_footer = (root / "_includes/everett-footer.html").read_text(encoding="utf-8")
+    checks.check("#why-everett" in everett_header, "Everett navigation must link to the naming explanation")
+    checks.check("Projects" not in everett_header, "Everett navigation must stay product-specific")
+    checks.check("Ragnar Pitla projects" not in everett_footer, "Everett footer must stay product-specific")
 
     expected_images = {
         "assets/images/everett/full/board.png": (1440, 900),
@@ -711,9 +735,9 @@ def built_verify(root: Path, origin: str, checks: Checks) -> None:
             hrefs = {href for _, href in parser.links}
             for expected_href in (
                 "/everett/",
+                "/everett/#why-everett",
                 "/everett/#product-truth",
                 "/everett/updates/",
-                "/",
             ):
                 checks.check(expected_href in hrefs, f"{route} missing Everett navigation link: {expected_href}")
 
@@ -753,6 +777,31 @@ def built_verify(root: Path, origin: str, checks: Checks) -> None:
 
     checks.check(len(set(titles)) == len(titles), "built HTML titles must be unique")
     checks.check(len(set(descriptions)) == len(descriptions), "built HTML descriptions must be unique")
+
+    everett_home = pages["/everett/"]
+    everett_home_text = everett_home.text.lower()
+    for marker in (
+        "world workspace",
+        "hugh everett iii",
+        "many-worlds interpretation",
+        "1957",
+    ):
+        checks.check(marker in everett_home_text, f"built Everett homepage missing required positioning: {marker}")
+    for marker in (
+        "measured in a live session",
+        "7 agents",
+        "2 directories",
+        "5 of 7 outside",
+        "ramify",
+    ):
+        checks.check(marker not in everett_home_text, f"built Everett homepage retains unrelated or incident-led copy: {marker}")
+    checks.check("why-everett" in everett_home.ids, "built Everett homepage is missing the why-everett anchor")
+    everett_home_hrefs = {href for _, href in everett_home.links}
+    checks.check("/everett/#why-everett" in everett_home_hrefs, "Everett homepage navigation is missing Why Everett")
+    checks.check(
+        all("/chess-local-learning/" not in href for href in everett_home_hrefs),
+        "Everett homepage must not link to Ramify",
+    )
 
     for route in ("/everett/", "/everett/updates/"):
         hrefs = [href for _, href in pages[route].links]
